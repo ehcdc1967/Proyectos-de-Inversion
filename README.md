@@ -32,7 +32,7 @@ Ciencia de datos, inversión pública, sobrecostos, modelos predictivos, gestió
 ---
 
 **Autor**: Eduardo Hugo Cáceres del Carpio  
-**Grado Académico**: Maestro en Ciencia de Datos  
+**Grado Académico**: Tesista de la Maestría en Ciencia de Datos  
 **Universidad**: Universidad Continental  
 **Asesor**: XYZ  
 **Año**: 2024
