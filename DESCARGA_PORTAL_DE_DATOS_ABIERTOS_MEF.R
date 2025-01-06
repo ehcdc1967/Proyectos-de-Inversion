@@ -2,23 +2,39 @@
 rm(list=ls())
 
 # PORTAL DE DATOS ABIERTOS DEL MINISTERIO DE ECONOMÍA Y FINANZAS DEL PERÚ 
+# https://datosabiertos.mef.gob.pe/dataset/detalle-de-inversiones
 
-library(tidyverse)
-library(arrow)
+library(tidyverse) ; library(arrow) ; library(httr) ; library(readr)
 
-# https://datosabiertos.mef.gob.pe/dataset?q=inversi&page=1&sort=nameasce :
+# directorio de datos
+diccionario <- 
+  read.csv( 
+    text = content(httr::GET("https://fs.datosabiertos.mef.gob.pe/datastorefiles/Detalle_Inversiones_Diccionario.csv",config(ssl_verifypeer=FALSE,ssl_verifyhost=FALSE)),as="text",encoding="UTF-8") 
+    ,colClasses   = 'character'
+    ,header       = TRUE
+    ,na.strings   = c('',' ','-','NULL','null','--','-.-')
+    ,fileEncoding = 'utf-8'
+  )
+
 
 # (0) Indetificación del tipo de variables 
 
-VARIABLES_NUMERICAS <- c( "MONTO_VIABLE"      , "COSTO_ACTUALIZADO" , "CTRL_CONCURR"     , "MONTO_LAUDO"           , "MONTO_FIANZA"     , "PMI_ANIO_1"
-                         ,"PMI_ANIO_2"        , "PMI_ANIO_3"        , "PMI_ANIO_4"       , "DEVEN_ACUMUL_ANIO_ANT" , "DEV_ANIO_ACTUAL"  , "PIA_ANIO_ACTUAL"
-                         ,"PIM_ANIO_ACTUAL"   , "DEV_ENE_ANIO_VIG"  , "DEV_FEB_ANIO_VIG" , "DEV_MAR_ANIO_VIG"      , "DEV_ABR_ANIO_VIG" , "DEV_MAY_ANIO_VIG"
-                         ,"DEV_JUN_ANIO_VIG"  , "DEV_JUL_ANIO_VIG"  , "DEV_AGO_ANIO_VIG" , "DEV_SET_ANIO_VIG"      , "DEV_OCT_ANIO_VIG" , "DEV_NOV_ANIO_VIG"
-                         ,"DEV_DIC_ANIO_VIG"  , "CERTIF_ANIO_ACTUAL", "SALDO_EJECUTAR"   , "AVANCE_FISICO"         , "AVANCE_EJECUCION" , "PROG_ACTUAL_ANIO_ACTUAL"
-                         ,"MONTO_VALORIZACION", "BENEFICIARIO"      , "MONTO_ET_F8"      , "COMPROM_ANUAL_ANIO_ACTUAL" )
+VARIABLES_CHARACTER <- c(  "NIVEL"              , "SECTOR"           , "ENTIDAD"        , "CODIGO_UNICO"          , "CODIGO_SNIP"    , "NOMBRE_INVERSION" , "NOMBRE_OPMI"      
+                         , "NOMBRE_UF"          , "NOMBRE_UEI"       , "SEC_EJEC"       , "NOMBRE_UEP"            , "ESTADO"         , "SITUACION"        , "ALTERNATIVA"
+                         , "FUNCION"            , "PROGRAMA"         , "SUBPROGRAMA"    , "MARCO"                 , "TIPO_INVERSION" , "DES_MODALIDAD"    , "ETAPA_F9"    
+                         , "PRIMER_DEVENGADO"   , "ULTIMO_DEVENGADO" , "ETAPA_F8"       , "ULT_PERIODO_REG_F12B"  , "DES_TIPOLOGIA"  , "DEPARTAMENTO"     , "PROVINCIA"  
+                         , "DISTRITO","UBIGEO"  , "LATITUD"          , "LONGITUD" )
 
-VARIABLES_FECHA <- c( "FECHA_REGISTRO"   , "FECHA_VIABILIDAD"  , "FEC_REG_F9"          , "FECHA_ULT_ACT_F12B" , "ULT_FEC_DECLA_ESTIM"
-                     ,"FEC_INI_EJECUCION", "FEC_FIN_EJECUCION" , "FEC_INI_EJEC_FISICA" , "FEC_FIN_EJEC_FISICA" )
+VARIABLES_NUMERICAS <- c( "MONTO_VIABLE"       , "COSTO_ACTUALIZADO"  , "CTRL_CONCURR"      , "MONTO_LAUDO"            , "MONTO_FIANZA"     , "PMI_ANIO_1"
+                         ,"PMI_ANIO_2"         , "PMI_ANIO_3"         , "PMI_ANIO_4"        , "DEVEN_ACUMUL_ANIO_ANT"  , "DEV_ANIO_ACTUAL"  , "PIA_ANIO_ACTUAL"
+                         ,"PIM_ANIO_ACTUAL"    , "DEV_ENE_ANIO_VIG"   , "DEV_FEB_ANIO_VIG"  , "DEV_MAR_ANIO_VIG"       , "DEV_ABR_ANIO_VIG" , "DEV_MAY_ANIO_VIG"
+                         ,"DEV_JUN_ANIO_VIG"   , "DEV_JUL_ANIO_VIG"   , "DEV_AGO_ANIO_VIG"  , "DEV_SET_ANIO_VIG"       , "DEV_OCT_ANIO_VIG" , "DEV_NOV_ANIO_VIG"
+                         ,"DEV_DIC_ANIO_VIG"   , "CERTIF_ANIO_ACTUAL" , "SALDO_EJECUTAR"    , "AVANCE_FISICO"          , "AVANCE_EJECUCION" , "COMPROM_ANUAL_ANIO_ACTUAL" 
+                         ,"MONTO_VALORIZACION" , "BENEFICIARIO"       , "MONTO_ET_F8"       , "ANIO_PROCESO"           , "PROG_ACTUAL_ANIO_ACTUAL")
+
+
+VARIABLES_FECHA <- c( "FECHA_REGISTRO"      , "FECHA_VIABILIDAD"   , "FEC_REG_F9"          , "FECHA_ULT_ACT_F12B" , "ULT_FEC_DECLA_ESTIM"
+                      ,"FEC_INI_EJECUCION"  , "FEC_FIN_EJECUCION"  , "FEC_INI_EJEC_FISICA" , "FEC_FIN_EJEC_FISICA")
 
 VARIABLES_DICOTOMICAS <- c("REGISTRADO_PMI","EXPEDIENTE_TECNICO","INFORME_CIERRE","TIENE_F9","TIENE_F8","TIENE_F12B","TIENE_AVAN_FISICO","SANEAMIENTO")
 
@@ -33,12 +49,13 @@ PALABRAS_CLAVES_CREACION     <- c("CREACION","CREAR","INSTALACION","IMPLEMENTACI
 # (1) Descarga de datos Portal de Datos Abiertos - Ministerio de Economía y Finanzas del Perú
 
 detalle_inversiones <- 
-  read.csv('https://fs.datosabiertos.mef.gob.pe/datastorefiles/DETALLE_INVERSIONES.csv'
-           ,colClasses = 'character'
-           ,header     = TRUE
-           ,na.strings = c('',' ','-','NULL','null','--','-.-')
-           ,fileEncoding = 'utf-8'
-           ) %>% 
+  read.csv( 
+       text = content(httr::GET("https://fs.datosabiertos.mef.gob.pe/datastorefiles/DETALLE_INVERSIONES.csv",config(ssl_verifypeer=FALSE,ssl_verifyhost=FALSE)),as="text",encoding="UTF-8") 
+      ,colClasses   = 'character'
+      ,header       = TRUE
+      ,na.strings   = c('',' ','-','NULL','null','--','-.-')
+      ,fileEncoding = 'utf-8'
+    ) %>% 
   mutate_if(is.character,trimws) %>% 
   mutate(
      across( VARIABLES_NUMERICAS   , as.numeric )
@@ -46,9 +63,6 @@ detalle_inversiones <-
     ,across( VARIABLES_DICOTOMICAS , function(x){x <- ifelse(x=="SI",1,ifelse(x=="NO",0,NA))})
     ,across( VARIABLES_ENTERAS     , as.integer)
     ) 
-
-diccionario <- read.csv('https://fs.datosabiertos.mef.gob.pe/datastorefiles/Detalle_Inversiones_Diccionario.csv')
-
 
 # (2) Determinación de la población objetivo:
 poblacion <- 
@@ -63,7 +77,7 @@ poblacion <-
                                   ,COSTO_ACTUALIZADO  > MONTO_VIABLE ~ "SOBRECOSTO" )
     ,SOBRECOSTO       = ifelse( COSTO_ACTUALIZADO>MONTO_VIABLE , 1, 0 )
     # Calcular Monto UIT según año
-    ,MTO_UIT          = case_when(ANIO_VIABILIDAD==2022 ~ MONTO_VIABLE/4600
+    ,MTO_UIT          = case_when(ANIO_VIABILIDAD==2022  ~ MONTO_VIABLE/4600
                                   ,ANIO_VIABILIDAD==2023 ~ MONTO_VIABLE/4950
                                   ,ANIO_VIABILIDAD==2024 ~ MONTO_VIABLE/5150
                                   ,ANIO_VIABILIDAD< 2022 ~ NA) ) %>%
@@ -103,7 +117,6 @@ poblacion <-
     ) %>% 
   # Identificación del tipo de municipalidad:
   left_join(  
-      # https://www.mef.gob.pe/index.php?option=com_content&view=article&id=2965&Itemid=101547&lang=es
       arrow::read_parquet('https://raw.githubusercontent.com/ehcdc1967/Proyectos-de-Inversion/main/TIPO_MUNICIPALIDAD.parquet') %>% select( UBIGEO , TIPO_MUNICIPALIDAD )
     , by = join_by(UBIGEO)  
     ) %>% 
