@@ -179,9 +179,9 @@ arrow::write_parquet( poblacion , 'POBLACION.parquet'   )
 
 # (4) Diccionario de la población objetivo:
 
-dicc_poblacion <- readxl::read_excel("DICCIONARIO_DE_DATOS.xlsx")
+dicc_poblacion <- readxl::read_excel("POBLACION_DICCIONARIO.xlsx")
 
-arrow::write_parquet( dicc_poblacion , 'POBLACIONA_DICCIONARIO.parquet' )
+arrow::write_parquet( dicc_poblacion , 'POBLACION_DICCIONARIO.parquet' )
 
 
 
