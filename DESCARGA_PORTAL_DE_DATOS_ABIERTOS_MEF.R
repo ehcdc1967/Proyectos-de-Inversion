@@ -1,13 +1,19 @@
 
 rm(list=ls())
 
-# PORTAL DE DATOS ABIERTOS DEL MINISTERIO DE ECONOMÍA Y FINANZAS DEL PERÚ 
+# PORTAL DE DATOS ABIERTOS DEL MINISTERIO DE ECONOMÍA Y FINANZAS DEL PERÚ  ============================================================================================================================
+
 # https://datosabiertos.mef.gob.pe/dataset/detalle-de-inversiones
 
 library(tidyverse) ; library(arrow) ; library(httr) ; library(readr)
 
-# directorio de datos
-diccionario <- 
+# directorio carpeta actual de datos 
+
+setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
+
+# (0) Diccionario de datos "Detalle Inversiones" :
+
+dicc_detalle_inve <- 
   read.csv( 
     text = content(httr::GET("https://fs.datosabiertos.mef.gob.pe/datastorefiles/Detalle_Inversiones_Diccionario.csv",config(ssl_verifypeer=FALSE,ssl_verifyhost=FALSE)),as="text",encoding="UTF-8") 
     ,colClasses   = 'character'
@@ -16,8 +22,10 @@ diccionario <-
     ,fileEncoding = 'utf-8'
   )
 
+arrow::write_parquet( dicc_detalle_inve , 'Detalle_Inversiones_Diccionario.parquet' )
 
-# (0) Indetificación del tipo de variables 
+
+# (1) Indetificación del tipo de variables "Detalle Inversiones" :
 
 VARIABLES_CHARACTER <- c(  "NIVEL"              , "SECTOR"           , "ENTIDAD"        , "CODIGO_UNICO"          , "CODIGO_SNIP"    , "NOMBRE_INVERSION" , "NOMBRE_OPMI"      
                          , "NOMBRE_UF"          , "NOMBRE_UEI"       , "SEC_EJEC"       , "NOMBRE_UEP"            , "ESTADO"         , "SITUACION"        , "ALTERNATIVA"
@@ -46,7 +54,7 @@ PALABRAS_CLAVES_AMPLIACION   <- c("AMPLIACION","DESARROLLO","DESARROLLAR","EXPAN
 PALABRAS_CLAVES_RECUPERACION <- c("RECUPERACION","RECUPERAR","REPARACION","RESTAURACION","REPOSICION","REHABILITACION","RENOVACION","RENOVAR","RECONSTRUCCION","REEMPLAZO","MANTENIMIENTO","REFUERZO","REINSTALACION","RECICLAJE")
 PALABRAS_CLAVES_CREACION     <- c("CREACION","CREAR","INSTALACION","IMPLEMENTACION","PUESTA EN MARCHA","NUEVA INFRAESTRUCTURA","CONSTRUCCION","EDIFICACION","OBRA NUEVA","DESARROLLO")
 
-# (1) Descarga de datos Portal de Datos Abiertos - Ministerio de Economía y Finanzas del Perú
+# (2) Descarga de datos Portal de Datos Abiertos - Ministerio de Economía y Finanzas del Perú
 
 detalle_inversiones <- 
   read.csv( 
@@ -64,7 +72,19 @@ detalle_inversiones <-
     ,across( VARIABLES_ENTERAS     , as.integer)
     ) 
 
-# (2) Determinación de la población objetivo:
+# Grabar 
+
+n <- nrow(detalle_inversiones)
+
+partes <- split( detalle_inversiones , rep(1:3,length.out=n) )
+
+for (i in seq_along(partes)) { write_parquet(partes[[i]], paste0("DETALLE_INVERSIONES_", i, ".parquet")) }
+
+list.files(pattern = "DETALLE_INVERSIONES_.*\\.parquet$")
+
+
+# (3) Determinación de la población objetivo:
+
 poblacion <- 
   detalle_inversiones %>% 
   mutate(
@@ -152,20 +172,30 @@ poblacion <-
   ) %>% 
   na.omit()
 
-# directorio actual de datos
-setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
-
-# Grabar datos Datos Abiertos
-n <- nrow(detalle_inversiones)
-partes <- split( detalle_inversiones , rep(1:3,length.out=n) )
-for (i in seq_along(partes)) { write_parquet(partes[[i]], paste0("DETALLE_INVERSIONES_", i, ".parquet")) }
-list.files(pattern = "DETALLE_INVERSIONES_.*\\.parquet$")
-
-# Grabar dicicionario de datos
-arrow::write_parquet( diccionario , 'DICCIONARIO.parquet' )
-
 # Grabar datos de poblacion de estudio
+
 arrow::write_parquet( poblacion , 'POBLACION.parquet'   )
+
+
+# (4) Diccionario de la población objetivo:
+
+dicc_poblacion <- readxl::read_excel("DICCIONARIO_DE_DATOS.xlsx")
+
+arrow::write_parquet( dicc_poblacion , 'POBLACIONA_DICCIONARIO.parquet' )
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
