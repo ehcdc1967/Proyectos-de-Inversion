@@ -1,26 +1,3 @@
-# Tesis de Maestría en Ciencia de Datos
-# APLICACIÓN DE CIENCIA DE DATOS EN EL ANÁLISIS DE LA EFICIENCIA EN LA FORMULACIÓN DE PROYECTOS DE INVERSIÓN PÚBLICA
-
-## Resumen
-Este estudio aplica técnicas de ciencia de datos para analizar la eficiencia en la formulación de proyectos de inversión pública en el Perú. Se enfoca en identificar factores que contribuyen a sobrecostos y el uso de adendas, utilizando modelos predictivos como regresión logística, árboles de decisión y métodos avanzados de machine learning. Con estos enfoques, se busca anticipar desviaciones presupuestarias desde las primeras etapas, optimizando la planificación, ejecución y asignación de recursos públicos.
-
-## Objetivos
-### General:
-- Aplicar técnicas de ciencia de datos para identificar factores asociados a los sobrecostos en proyectos de inversión pública y proponer recomendaciones para mejorar la precisión presupuestaria y la gestión de recursos.
-
-### Específicos:
-- Analizar los factores que contribuyen a sobrecostos, como el tipo de proyecto y su ubicación geográfica.
-- Evaluar el impacto del uso de adendas en la eficiencia y costos finales.
-- Desarrollar un modelo predictivo para anticipar desviaciones presupuestarias.
-- Identificar patrones recurrentes para optimizar la formulación y ejecución de proyectos.
-
-## Metodología
-La investigación utiliza un enfoque cuantitativo y modelos predictivos como Random Forest y XGBoost para analizar datos históricos del Banco de Proyectos de INVIERTE.PE. Se emplearon técnicas de validación cruzada y métricas como precisión, recall y AUC-ROC para evaluar los modelos.
-
-## Fuente de información
-El análisis se basa en datos obtenidos del portal de datos abiertos del Ministerio de Economía y Finanzas del Perú, específicamente del conjunto de datos relacionado con proyectos de inversión pública, disponible en https://datosabiertos.mef.gob.pe/dataset?q=INVERSION&page=1. Este recurso proporciona información detallada sobre proyectos registrados, su estado, presupuestos asignados y modificaciones, entre otros aspectos clave para el estudio.
-
-"""
 # Tesis de Maestría en Ciencia de Datos  
 # APLICACIÓN DE CIENCIA DE DATOS EN EL ANÁLISIS DE LA EFICIENCIA EN LA FORMULACIÓN DE PROYECTOS DE INVERSIÓN PÚBLICA  
 
