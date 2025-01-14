@@ -10,7 +10,6 @@ Este estudio aplica técnicas de ciencia de datos para analizar la eficiencia en
 
 ### Específicos:  
 - Analizar los factores que contribuyen a sobrecostos, como el tipo de proyecto y su ubicación geográfica.  
-- Evaluar el impacto del uso de adendas en la eficiencia y costos finales.  
 - Desarrollar un modelo predictivo para anticipar desviaciones presupuestarias.  
 - Identificar patrones recurrentes para optimizar la formulación y ejecución de proyectos.  
 
