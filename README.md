@@ -6,12 +6,12 @@ Este estudio aplica técnicas de ciencia de datos para analizar la eficiencia en
 
 ## Objetivos  
 ### General:  
-- Aplicar técnicas de ciencia de datos para identificar factores asociados a los sobrecostos en proyectos de inversión pública y proponer recomendaciones para mejorar la precisión presupuestaria y la gestión de recursos.  
+- Aplicar técnicas de ciencia de datos para analizar la eficiencia en la formulación de proyectos de inversión pública en Perú, identificando factores y patrones asociados con los sobrecostos y el uso de adendas, con el fin de proponer recomendaciones para mejorar la precisión en las estimaciones presupuestarias y optimizar la gestión de recursos en futuros proyectos.  
 
 ### Específicos:  
-- Analizar los factores que contribuyen a sobrecostos, como el tipo de proyecto y su ubicación geográfica.  
-- Desarrollar un modelo predictivo para anticipar desviaciones presupuestarias.  
-- Identificar patrones recurrentes para optimizar la formulación y ejecución de proyectos.  
+- Realizar un análisis descriptivo de los factores que contribuyen a los sobrecostos en proyectos de inversión pública, como tipo de proyecto, ubicación geográfica y nivel de gobierno.  
+- Desarrollar un modelo predictivo para anticipar desviaciones presupuestarias, permitiendo identificar proyectos con riesgo de sobrecostos.  
+- Identificar patrones de ineficiencia y sobrecostos recurrentes en proyectos para proponer recomendaciones que optimicen la formulación y ejecución de futuros proyectos públicos. 
 
 ## Metodología  
 La investigación utiliza un enfoque cuantitativo y modelos predictivos como Random Forest y XGBoost para analizar datos históricos del Banco de Proyectos de INVIERTE.PE. Se emplearon técnicas de validación cruzada y métricas como precisión, recall y AUC-ROC para evaluar los modelos.  
@@ -37,14 +37,12 @@ Los datos analizados contienen las siguientes variables clave:
 | 11 | MODIFICACION_F8            | Modificaciones del proyecto antes del expediente técnico.                                                                                                   |
 | 12 | EXPEDIENTE_TECNICO         | Expediente técnico de un proyecto de inversión pública inscrito en el Sistema Invierte.pe.                                                                  |
 | 13 | REGISTRADO_PMI             | Proyecto de inversión pública formalmente incluido en el Programa Multianual de Inversiones (PMI).                                                          |
-| 14 | RATIO_ET_VIABLE            | Ratio de elaboración técnica respecto al monto viable.                                                                                                      |
-| 15 | RATIO_ET_COSTO             | Ratio monto de elaboración de expediente técnico respecto al monto actualizado.                                                                             |
-| 16 | NATURALEZA_MEJORAMIENTO    | Naturaleza del proyecto que busca mejorar la calidad, eficiencia o funcionalidad de bienes o servicios existentes.                                          |
-| 17 | NATURALEZA_AMPLIACION      | Naturaleza del proyecto que busca incrementar la capacidad o el alcance de un bien o servicio público existente.                                            |
-| 18 | NATURALEZA_RECUPERACION    | Naturaleza del proyecto que busca restaurar o restablecer la funcionalidad de un bien o servicio público dañado o inoperativo.                              |
-| 19 | NATURALEZA_CREACION        | Naturaleza del proyecto que busca generar un bien o servicio público nuevo.                                                                                 |
-| 20 | FUNCION                    | Descripción de la función.                                                                                                                                  |
-| 21 | DPTO                       | División política administrativa de mayor nivel del Perú.                                                                                                   |
+| 14 | NATURALEZA_MEJORAMIENTO    | Naturaleza del proyecto que busca mejorar la calidad, eficiencia o funcionalidad de bienes o servicios existentes.                                          |
+| 15 | NATURALEZA_AMPLIACION      | Naturaleza del proyecto que busca incrementar la capacidad o el alcance de un bien o servicio público existente.                                            |
+| 16 | NATURALEZA_RECUPERACION    | Naturaleza del proyecto que busca restaurar o restablecer la funcionalidad de un bien o servicio público dañado o inoperativo.                              |
+| 17 | NATURALEZA_CREACION        | Naturaleza del proyecto que busca generar un bien o servicio público nuevo.                                                                                 |
+| 18 | FUNCION                    | Descripción de la función.                                                                                                                                  |
+| 19 | DPTO                       | División política administrativa de mayor nivel del Perú.                                                                                                   |
 
 ## Impacto
 Los resultados tienen el potencial de:
@@ -63,5 +61,4 @@ Ciencia de datos, inversión pública, sobrecostos, modelos predictivos, gestió
 **Autor**: Eduardo Hugo Cáceres del Carpio  
 **Grado Académico**: Tesista de la Maestría en Ciencia de Datos  
 **Universidad**: Universidad Continental  
-**Asesor**: XYZ  
 **Año**: 2024
