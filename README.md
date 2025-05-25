@@ -1,20 +1,21 @@
 # Tesis de Maestría en Ciencia de Datos  
-# APLICACIÓN DE CIENCIA DE DATOS EN EL ANÁLISIS DE LA EFICIENCIA EN LA FORMULACIÓN DE PROYECTOS DE INVERSIÓN PÚBLICA  
+# APLICACIÓN DE TÉCNICAS DE CIENCIA DE DATOS PARA IDENTIFICAR FACTORES ASOCIADOS A SOBRECOSTOS Y EVALUAR LA EFICIENCIA EN LA FORMULACIÓN DE PROYECTOS DE INVERSIÓN PÚBLICA  
 
 ## Resumen  
-Este estudio aplica técnicas de ciencia de datos para analizar la eficiencia en la formulación de proyectos de inversión pública en el Perú. Se enfoca en identificar factores que contribuyen a sobrecostos y el uso de adendas, utilizando modelos predictivos como regresión logística, árboles de decisión y métodos avanzados de machine learning. Con estos enfoques, se busca anticipar desviaciones presupuestarias desde las primeras etapas, optimizando la planificación, ejecución y asignación de recursos públicos.  
+El presente estudio hace uso de la Ciencia de Datos para analizar la eficiencia de los proyectos de inversión pública priorizados por el Sistema de Programación Multianual y Gestión de Inversiones del Perú- Invierte.pe, durante las fases iniciales de formulación y evaluación. Su objetivo es identificar y anticipar la ocurrencia de sobrecostos con el fin de mejorar la eficiencia en la planificación de proyectos y uso optimizado de los recursos públicos. Para ello se aplicaron técnicas de ciencia de datos, específicamente Random Forest y XGBoost, para predecir sobrecostos en proyectos ejecutados por los gobiernos locales entre 2022 y 2024. Los resultados muestran que el modelo XGBoost alcanzó un 89.60% de F1-Score, superando en desempeño al modelo Random Forest que obtuvo un F1-score de 88.56%. Además, se identificó que los principales factores asociados a los sobrecostos incluyen la modalidad de ejecución, la existencia de modificaciones previas al expediente técnico y el tipo de municipalidad ejecutora. Estos hallazgos sugieren que la aplicación de técnicas de ciencia de datos puede fortalecer la evaluación ex ante de los proyectos de inversión pública contribuyendo a mejorar la eficiencia en la asignación del presupuesto público.
 
 ## Objetivos  
+
 ### General:  
-- Aplicar técnicas de ciencia de datos para analizar la eficiencia en la formulación de proyectos de inversión pública en Perú, identificando factores y patrones asociados con los sobrecostos y el uso de adendas, con el fin de proponer recomendaciones para mejorar la precisión en las estimaciones presupuestarias y optimizar la gestión de recursos en futuros proyectos.  
+- Aplicar técnicas de ciencia de datos para analizar la formulación de proyectos de inversión pública en Perú, identificando factores y patrones asociados con los sobrecostos con el fin de mejorar la precisión presupuestaria y optimizar la gestión de recursos en futuros proyectos.  
 
 ### Específicos:  
-- Realizar un análisis descriptivo de los factores que contribuyen a los sobrecostos en proyectos de inversión pública, como tipo de proyecto, ubicación geográfica y nivel de gobierno.  
-- Desarrollar un modelo predictivo para anticipar desviaciones presupuestarias, permitiendo identificar proyectos con riesgo de sobrecostos.  
-- Identificar patrones de ineficiencia y sobrecostos recurrentes en proyectos para proponer recomendaciones que optimicen la formulación y ejecución de futuros proyectos públicos. 
+- Analizar los factores asociados a sobrecostos en proyectos de inversión pública, considerando variables como ubicación geográfica y nivel de gobierno.  
+- Desarrollar un modelo de ciencia de datos que prediga la probabilidad de desviaciones presupuestarias en la etapa de formulación de proyectos de inversión pública.  
+- Identificar patrones recurrentes de ineficiencia que permita mejorar el diseño y planificación de proyectos de inversión pública. 
 
 ## Metodología  
-La investigación utiliza un enfoque cuantitativo y modelos predictivos como Random Forest y XGBoost para analizar datos históricos del Banco de Proyectos de INVIERTE.PE. Se emplearon técnicas de validación cruzada y métricas como precisión, recall y AUC-ROC para evaluar los modelos.  
+La investigación utiliza un enfoque cuantitativo y modelos predictivos como Random Forest y XGBoost para analizar datos históricos del Banco de Proyectos de INVIERTE.PE. Se emplearon técnicas de validación cruzada y métricas como precisión, recall y F1-score para evaluar los modelos.  
 
 ### Fuente de información  
 El análisis se basa en datos obtenidos del portal de datos abiertos del Ministerio de Economía y Finanzas del Perú, específicamente del conjunto de datos relacionado con proyectos de inversión pública, disponible en [https://datosabiertos.mef.gob.pe/dataset?q=INVERSION&page=1](https://datosabiertos.mef.gob.pe/dataset?q=INVERSION&page=1). Este recurso proporciona información detallada sobre proyectos registrados, su estado, presupuestos asignados y modificaciones, entre otros aspectos clave para el estudio.  
@@ -59,6 +60,6 @@ Ciencia de datos, inversión pública, sobrecostos, modelos predictivos, gestió
 ---
 
 **Autor**: Eduardo Hugo Cáceres del Carpio  
-**Grado Académico**: Tesista de la Maestría en Ciencia de Datos  
+           Maestrando en Ciencia de Datos  
 **Universidad**: Universidad Continental  
-**Año**: 2024
+**Año**: 2025
