@@ -61,5 +61,6 @@ Ciencia de datos, inversión pública, sobrecostos, modelos predictivos, gestió
 
 **Autor**: Eduardo Hugo Cáceres del Carpio  
 Universidad Continental  
-Maestrando en Ciencia de Datos  
+Maestrando en Ciencia de Datos
+Lima - Perú
 2025
